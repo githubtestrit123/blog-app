@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,13 +10,62 @@ import {
   EyeSlashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "@/firebase";
+import { signInUser } from "@/redux/slices/userSlice";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function SignUpModal() {
+  const [ name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const isOpen = useSelector((state) => state.modals.signUpModalOpen);
 
   const dispatch = useDispatch();
+
+  async function handleSignUp() {
+    const userCredentials = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+
+    );
+    await updateProfile(userCredentials.user, {
+      displayName: name
+    });
+
+    dispatch(
+      signInUser({
+        name: userCredentials.user.displayName,
+        username: userCredentials.user.email.split("@")[0],
+          email: userCredentials.user.email,
+          uid: userCredentials.user.uid
+      })
+    );
+  }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (!currentUser) return
+      console.log(currentUser)
+
+      //Handle Redux Actions
+      dispatch(signInUser(
+        {
+          name: currentUser.displayName,
+          username: currentUser.email.split("@")[0],
+          email: currentUser.email,
+          uid: currentUser.uid
+
+        }))
+
+
+    })
+    return unsubscribe
+
+  }, [])
 
   return (
     <>
@@ -39,7 +88,7 @@ export default function SignUpModal() {
             onClick={() => dispatch(closeSignUpModal())}
           />
 
-          <form className="pt-8 pb-14 px-6 sm:px-12">
+          <div className="pt-8 pb-14 px-6 sm:px-12">
             <h1 className="text-3xl font-bold mb-10 text-center text-yellow-500">
               Create your account
             </h1>
@@ -50,6 +99,8 @@ export default function SignUpModal() {
                 className="w-full h-[50px] bg-[#2a2a2a] text-white placeholder-gray-400 border border-gray-700 rounded-lg pl-4 outline-none focus:ring-2 focus:ring-yellow-500"
                 placeholder="Name"
                 type="text"
+                onChange={(event) => setName(event.target.value)}
+                value={name}
               />
 
               {/* Email */}
@@ -57,6 +108,8 @@ export default function SignUpModal() {
                 className="w-full h-[50px] bg-[#2a2a2a] text-white placeholder-gray-400 border border-gray-700 rounded-lg pl-4 outline-none focus:ring-2 focus:ring-yellow-500"
                 placeholder="Email"
                 type="email"
+                onChange={(event) => setEmail(event.target.value)}
+                value={email}
               />
 
               {/* Password */}
@@ -65,6 +118,8 @@ export default function SignUpModal() {
                   placeholder="Password"
                   type={showPassword ? "text" : "password"}
                   className="w-full h-full bg-transparent text-white placeholder-gray-400 pl-4 outline-none"
+                  onChange={(event) => setPassword(event.target.value)}
+                  value={password}
                 />
                 <div
                   onClick={() => setShowPassword(!showPassword)}
@@ -76,7 +131,8 @@ export default function SignUpModal() {
             </div>
 
             {/* Buttons */}
-            <button className="bg-yellow-400 text-black font-semibold h-[48px] rounded-full shadow-md mb-5 w-full hover:bg-yellow-700 transition">
+            <button className="bg-yellow-400 text-black font-semibold h-[48px] rounded-full shadow-md mb-5 w-full hover:bg-yellow-700 transition"
+              onClick={() => handleSignUp()}>
               Sign Up
             </button>
 
@@ -85,7 +141,7 @@ export default function SignUpModal() {
             <button className="bg-yellow-400 text-black font-medium h-[48px] rounded-full shadow-md w-full hover:bg-yellow-700 transition">
               Login as Guest
             </button>
-          </form>
+          </div>
         </div>
       </Modal>
     </>

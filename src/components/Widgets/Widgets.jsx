@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Widgets() {
   return (
-    <div className="p-3 hidden  lg:flex flex-col bg-black w-[350px] space-y-4 text-white">
+    <div className="p-3 hidden  lg:flex flex-col bg-black w-[350px] space-y-4 text-white ps-10">
       {/* 🔍 Search Bar */}
       <div className="flex items-center space-x-3 bg-[#EFF3F4] text-[#89959D] rounded-full px-4 py-2">
         <MagnifyingGlassIcon className="w-5 h-5" />
