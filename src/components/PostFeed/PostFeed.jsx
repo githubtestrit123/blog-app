@@ -1,5 +1,6 @@
 import React from 'react'
 import PostInput from '../PostInput/PostInput'
+import Post from '../Post/Post'
 
 export default function PostFeed() {
   return (
@@ -9,7 +10,7 @@ export default function PostFeed() {
         </div>
         <PostInput />
 
-    PostFeed
+         <Post />
     </div>
   )
 }
