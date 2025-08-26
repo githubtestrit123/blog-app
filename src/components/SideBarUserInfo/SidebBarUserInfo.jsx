@@ -16,7 +16,8 @@ export default function SidebBarUserInfo() {
 
   }
   return (
-    <div className="absolute bottom-3 text-white bg-black flex items-center xl:p-3 xl:pe-6  hover: bg-gray-800 rounded-full transition cursor-pointer"
+    <div className="absolute bottom-3 text-white bg-black flex items-center justify-start space-x-2 xl:p-3 xl:pe-6  hover: bg-gray-800 rounded-full transition cursor-pointer
+    w-fit xl:w-[200px]"
     onClick={() => handleSignOut()}>
             <Image 
             src={"/assets/bee_logo.png"}
@@ -25,9 +26,9 @@ export default function SidebBarUserInfo() {
             alt='profile'
             className='w-9 h-9'
             />
-            <div className='hidden xl:flex flex-col text-sm'>
-              <span className='font-bold'>{user.name}</span>
-              <span className='text-white'>@{user.username}</span>
+            <div className='hidden xl:flex flex-col text-sm max-w-40'>
+              <span className='whitespace-nowrap text-ellipsis overflow-hidden font-bold'>{user.name}</span>
+              <span className='whitespace-nowrap text-ellipsis overflow-hidden text-white'>@{user.username}</span>
             </div>
         </div>
   )
