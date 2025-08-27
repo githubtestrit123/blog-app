@@ -9,14 +9,16 @@ import Image from 'next/image';
 export default function SidebBarUserInfo() {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user)
-
+ 
   async function handleSignOut() {
     await signOut(auth);
     dispatch(signOutUser())
 
   }
+  const name = useSelector((state => state.user.name))
   return (
-    <div className="absolute bottom-3 text-white bg-black flex items-center justify-start space-x-2 xl:p-3 xl:pe-6  hover: bg-gray-800 rounded-full transition cursor-pointer
+    name &&
+    <div className="absolute bottom-3 text-white flex items-center justify-start space-x-2 xl:p-3 xl:pe-6  hover: bg-black rounded-full transition cursor-pointer
     w-fit xl:w-[200px]"
     onClick={() => handleSignOut()}>
             <Image 

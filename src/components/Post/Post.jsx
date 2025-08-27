@@ -6,11 +6,20 @@ import {
 } from '@heroicons/react/24/outline';
 import React from 'react'
 import Image from 'next/image'
+import moment from "moment";
 
-export default function Post() {
+
+export default function Post({ data }) {
+  if (!data) return null; 
   return (
     <div className='bg-black text-white border-b border-gray-800'>
-       <PostHeader />
+       <PostHeader 
+       username={data.username}
+       name={data.name}
+       timestamp={data.timestamp}
+       text={data.text}
+       
+       />
 
        {/* Post Actions */}
        <div className='ml-16 p-3 flex space-x-14'>
@@ -36,9 +45,12 @@ export default function Post() {
   )
 }
 
-export function PostHeader() {
+export function PostHeader({username, name, timestamp, text}) {
   return (
+    
+    
     <div className='flex p-3 space-x-5 bg-black text-white'>
+     
       {/* Profile Image */}
       <Image 
         src="/assets/profile-pic.png" 
@@ -48,15 +60,25 @@ export function PostHeader() {
         className="rounded-full"
       />
 
-      {/* User Info */}
-      <div className="text-[15px] flex flex-col space-y-1.5">
+      
+      <div className="text-[15px] flex flex-col space-y-1.5 bg-black text-white rounded-lg">
         <div className="flex space-x-1.5">
-          <span className="font-bold truncate max-w-[160px]">Guest</span> 
-          <span className="truncate max-w-[140px]">@guest000</span>
+          <span className="font-bold  max-w-[60px] min-[400px]:max-w-[100px] min-[500px]:max-w-[140px] sm:max-w-[160px] text-white inline-block whitespace-nowrap overflow-hidden 
+          text-ellipsis "> {name}</span> 
+          <span className="max-w-[60px] min-[400px]:max-w-[100px] min-[500px]:max-w-[140px] sm:max-w-[160px] text-white inline-block whitespace-nowrap overflow-hidden 
+          text-ellipsis ">@{username}</span>
           <span>·</span>
-          <span>a day ago</span>
+          {timestamp &&
+          <span>
+            {moment(timestamp.toDate()).fromNow()}
+          </span>}
+        </div>
+        <div>
+          <span>{text}</span>
         </div>
       </div>
+
+      
     </div>
   );
 }
