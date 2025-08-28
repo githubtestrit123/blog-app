@@ -8,7 +8,7 @@ export default function Sidebar() {
   
   return (
     <nav className="h-screen hidden sm:flex flex-col sticky top-0 p-3 xl:ml-20">
-      <div className="relative h-full flex flex-col items-center">
+      <div className="relative h-full flex flex-col">
         <div className="py-3">
           <Image src={'/assets/bee_logo.png'} alt="logo" width={52} height={52} />
         </div>
@@ -20,9 +20,7 @@ export default function Sidebar() {
             <SidebarLink Icon={BookmarkIcon} text="BookMarks"/>
             <SidebarLink Icon={UserIcon} text="Profile"/>
             <SidebarLink Icon={EllipsisHorizontalCircleIcon} text="More"/>
-            <button className="hidden xl:block bg-[#F4AF01] w-[200px] h-[52px] rounded-full text-white font-medium cursor-pointer shadow-md mt-2"> 
-              Bumble
-            </button>
+            
             
         </ul>
         <SidebBarUserInfo />

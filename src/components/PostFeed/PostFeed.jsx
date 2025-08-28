@@ -4,15 +4,19 @@ import PostInput from '../PostInput/PostInput'
 import Post from '../Post/Post'
 import { onSnapshot, orderBy, query , collection } from 'firebase/firestore'
 import { db  } from '@/firebase'
+import { useDispatch } from 'react-redux'
+import { closeLoadingScreen } from '@/redux/slices/loadingSlice'
 
 export default function PostFeed() {
   const [posts, setPosts] = useState([])
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     const q= query(collection(db, "posts"), orderBy("timestamp", "desc"))
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const snapshotDocs = snapshot.docs
       setPosts(snapshotDocs)
+      dispatch(closeLoadingScreen())
 
     })
     return unsubscribe
@@ -29,7 +33,7 @@ export default function PostFeed() {
         Our Latest Posts
       </h2>
         {posts.map((doc) => (
-          <Post key={doc.id} data={doc.data()} />
+          <Post key={doc.id} data={doc.data()}  id = {doc.id}/>
         ))}
         </div>
 

@@ -4,7 +4,7 @@ import React from "react";
 export default function Widgets() {
   return (
     <div className="p-3 hidden  lg:flex flex-col bg-black w-[350px] space-y-4 text-white ps-10">
-      {/* 🔍 Search Bar */}
+     
       <div className="flex items-center space-x-3 bg-[#EFF3F4] text-[#89959D] rounded-full px-4 py-2">
         <MagnifyingGlassIcon className="w-5 h-5" />
         <input
@@ -14,7 +14,7 @@ export default function Widgets() {
         />
       </div>
 
-      {/* 📌 What's Happening Section */}
+      
       <div className="bg-black border border-white rounded-xl p-3 space-y-4 text-white">
         <h1 className="text-xl font-bold">What's Happening?</h1>
 
@@ -35,7 +35,7 @@ export default function Widgets() {
         ))}
       </div>
 
-      {/* 👥 Who to Follow Section */}
+      
       <div className="bg-black border border-white rounded-xl p-3 space-y-4 text-white">
         <h1 className="text-xl font-bold">Who to Follow</h1>
 
