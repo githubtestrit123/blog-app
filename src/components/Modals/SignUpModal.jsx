@@ -136,11 +136,7 @@ export default function SignUpModal() {
               Sign Up
             </button>
 
-            <p className="text-center text-gray-400 mb-5">OR</p>
-
-            <button className="bg-yellow-400 text-black font-medium h-[48px] rounded-full shadow-md w-full hover:bg-yellow-700 transition">
-              Login as Guest
-            </button>
+            
           </div>
         </div>
       </Modal>

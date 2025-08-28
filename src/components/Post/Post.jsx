@@ -72,9 +72,9 @@ export default function Post({ data, id }) {
         <div className="relative">
           {
             data.likes.includes(user.uid) ?
-            <HeartSolidIcon className="w-[22px] h-[22px] cursor-pointer text-pink-500 transition"
+            <HeartSolidIcon className="w-[22px] h-[22px] cursor-pointer text-red-500 transition"
           onClick={() => likePost()} /> :
-          <HeartIcon className="w-[22px] h-[22px] cursor-pointer hover:text-pink-500 transition"
+          <HeartIcon className="w-[22px] h-[22px] cursor-pointer hover:text-red-500 transition"
           onClick={() => likePost()} />
         }
         {
@@ -104,13 +104,13 @@ export function PostHeader({ username, name, timestamp, text, replyTo }) {
         width={44} 
         height={44} 
         alt="Profile" 
-        className="w-11 h-11 z-10 bg-white"
+        className="w-11 h-11 z-10 bg-white rounded-full"
       />
 
       
       <div className="text-[15px] flex flex-col space-y-1.5 rounded-lg">
         <div className="flex space-x-1.5">
-          <span className="font-bold max-w-[140px] text-ellipsis overflow-hidden whitespace-nowrap">{name}</span> 
+          <span className="font-bold max-w-[140px] text-ellipsis overflow-hidden whitespace-nowrap text-[#F4AF01]">{name}</span> 
           <span className="text-gray-400">@{username}</span>
 
           {timestamp && (

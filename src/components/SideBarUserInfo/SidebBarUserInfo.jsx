@@ -26,7 +26,7 @@ export default function SidebBarUserInfo() {
             width={36}
             height={36}
             alt='profile'
-            className='w-9 h-9 bg-white'
+            className='w-9 h-9 bg-white rounded-full'
             />
             <div className='hidden xl:flex flex-col text-sm max-w-40'>
               <span className='whitespace-nowrap text-ellipsis overflow-hidden font-bold'>{user.name}</span>

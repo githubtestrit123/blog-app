@@ -32,7 +32,7 @@ export default function Sidebar() {
 
 function SidebarLink({text, Icon}){
   return (
-  <li className="flex item-center text-xl mb-2 space-x-3 p-2.5">
+  <li className="flex item-center text-xl mb-2 space-x-3 p-2.5 hover:text-yellow-400 cursor-pointer transition-colors duration-200">
     <Icon className="h-7" />
     <span className="hidden xl:block">{text}</span>
     </li>

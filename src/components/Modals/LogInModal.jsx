@@ -24,6 +24,8 @@ export default function LogInModal() {
 
     }
 
+    
+
 
 
     return (
@@ -74,10 +76,7 @@ export default function LogInModal() {
                         onClick={() => handleLogin()}>
                             Log In
                         </button>
-                        <span className="text-center text-gray-400 mb-5">OR</span>
-                        <button className="bg-yellow-400 text-black font-semibold h-[48px] rounded-full shadow-md mb-5 w-full hover:bg-yellow-700 transition">
-                            Login as Guest
-                        </button>
+                        
 
 
 
